@@ -1,0 +1,48 @@
+/*create table student
+(
+    std_id number(2) PRIMARY KEY,
+    name varchar(255),
+    age number(4),
+    cgpa float(5)
+);
+insert into student values(3,'dca',24,7.7);*/
+
+DECLARE 
+   n number ;
+   t number;
+   s_id student.std_id%type; 
+   s_name student.name%type; 
+   s_cgpa student.cgpa%type; 
+   CURSOR s_student is 
+      SELECT std_id, name, cgpa FROM student; 
+PROCEDURE pro AS
+BEGIN 
+   OPEN s_student; 
+   LOOP 
+   FETCH s_student into s_id, s_name, s_cgpa; 
+      EXIT WHEN s_student%notfound; 
+      s_cgpa:=s_cgpa*10;
+      dbms_output.put_line('Id:' || s_id || '    Name:' || s_name || '    Percentage:' || s_cgpa); 
+   END LOOP; 
+   CLOSE s_student; 
+END; 
+FUNCTION func  
+RETURN number IS  
+   total number(2) := 0;  
+BEGIN  
+   SELECT count(*) into total  
+   FROM student;  
+    RETURN total;  
+END;  
+
+BEGIN
+n:=1;
+case n
+    when 1 then
+      PRO();
+    when 2 then
+        t:=func();
+        dbms_output.put_line(t);
+END case;
+END;
+/

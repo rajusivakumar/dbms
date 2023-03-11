@@ -1,0 +1,23 @@
+declare
+n number(5);
+begin
+ n:=1;  --1 for print first 10 numbers,2 for even number,3 for odd
+
+for i in 1..10 loop
+ case n
+ when 1 then
+ dbms_output.put_line(i);
+ when 2 then
+ if mod(i,2)=0 then 
+ dbms_output.put_line(i);
+ end if;
+ when 3 then 
+ if mod(i,2)!=0 then 
+ dbms_output.put_line(i);
+ end if;
+ end case;
+ end loop;
+-- Print the Result
+
+end;
+/
